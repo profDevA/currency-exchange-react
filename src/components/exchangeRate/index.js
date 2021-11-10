@@ -55,7 +55,7 @@ export default function ExchangeRate() {
     if (fromAmount > 0) {
       setState(state => ({
         ...state,
-        toAmount: round(fromAmount * rates[fromCode + toCode]),
+        toAmount: round(fromAmount * rates[fromCode + toCode], 2),
       }));
     }
   }, [fromCode, toCode, fromAmount, rates]);
