@@ -53,10 +53,10 @@ export default function ExchangeRate() {
 
   useEffect(() => {
     if (fromAmount > 0) {
-      setState({
+      setState(state => ({
         ...state,
         toAmount: round(fromAmount * rates[fromCode + toCode]),
-      });
+      }));
     }
   }, [fromCode, toCode, fromAmount, rates]);
 
