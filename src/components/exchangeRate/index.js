@@ -26,6 +26,8 @@ export default function ExchangeRate() {
     GBPEUR: 1.1697,
   });
 
+  const { fromCode, toCode, fromAmount } = state;
+
   // Get the exchange rate on first load. Because API data is updated daily,
   // there is no need to fetch exchange rates in real time (Also free plan does not support it).
   useEffect(() => {
@@ -50,14 +52,13 @@ export default function ExchangeRate() {
   }, [state, balance]);
 
   useEffect(() => {
-    const { fromAmount, fromCode, toCode } = state;
     if (fromAmount > 0) {
       setState({
         ...state,
         toAmount: round(fromAmount * rates[fromCode + toCode]),
       });
     }
-  }, [state.fromCode, state.toCode]);
+  }, [fromCode, toCode, fromAmount, rates]);
 
   const exchangeCurrency = () => {
     const { fromCode, toCode, fromAmount, toAmount } = state;
