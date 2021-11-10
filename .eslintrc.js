@@ -4,8 +4,7 @@ module.exports = {
         "es2021": true
     },
     "extends": [
-        "eslint:recommended",
-        "plugin:react/recommended",
+        "react-app",
         "plugin:prettier/recommended"
     ],
     "parserOptions": {
@@ -21,7 +20,6 @@ module.exports = {
     ],
     "rules": {
         "prettier/prettier": "error",
-        "no-console": "warn",
         "import/first": "error",
         "react/prop-types": 0,
         "linebreak-style": ["error", "unix"]

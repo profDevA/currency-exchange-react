@@ -1,11 +1,11 @@
 export const round = (n, digits) => {
-  return Number(parseFloat(n).toFixed(digits))
-}
+  return Number(parseFloat(n).toFixed(digits));
+};
 
 export const currencyFormat = (n, code, maximumFractionDigits) => {
-  return Number(n).toLocaleString("en-US", {
+  return Number(n).toLocaleString('en-US', {
     maximumFractionDigits,
-    style: "currency",
+    style: 'currency',
     currency: code,
   });
-}
+};

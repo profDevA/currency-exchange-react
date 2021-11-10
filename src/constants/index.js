@@ -1,5 +1,1 @@
-export const currencyCodes = [
-  'USD',
-  'EUR',
-  'GBP'
-]
+export const currencyCodes = ['USD', 'EUR', 'GBP'];
