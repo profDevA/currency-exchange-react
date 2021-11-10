@@ -29,17 +29,17 @@ export default function ExchangeRate() {
   // Get the exchange rate on first load. Because API data is updated daily,
   // there is no need to fetch exchange rates in real time (Also free plan does not support it).
   useEffect(() => {
-    // getRates().then((rates) => {
-    //   // calculate rates and store
-    //   setRates({
-    //     USDEUR: round(rates.EUR / rates.USD, 4),
-    //     USDGBP: round(rates.GBP / rates.USD, 4),
-    //     EURUSD: round(rates.USD, 4),
-    //     EURGBP: round(rates.GBP, 4),
-    //     GBPUSD: round(rates.USD / rates.GBP, 4),
-    //     GBPEUR: round(rates.EUR / rates.GBP, 4),
-    //   });
-    // });
+    getRates().then((rates) => {
+      // calculate rates and store
+      setRates({
+        USDEUR: round(rates.EUR / rates.USD, 4),
+        USDGBP: round(rates.GBP / rates.USD, 4),
+        EURUSD: round(rates.USD, 4),
+        EURGBP: round(rates.GBP, 4),
+        GBPUSD: round(rates.USD / rates.GBP, 4),
+        GBPEUR: round(rates.EUR / rates.GBP, 4),
+      });
+    });
   }, []);
 
   // warn if fromAmount is grater than fromBalance
