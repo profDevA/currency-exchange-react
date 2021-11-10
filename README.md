@@ -23,7 +23,7 @@ See the section about [running tests](https://facebook.github.io/create-react-ap
 Builds the app for production to the `build` folder.\
 
 
-## Project description
+## Project Summary
 
 
 ### Stack
