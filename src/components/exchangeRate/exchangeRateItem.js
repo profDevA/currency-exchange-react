@@ -1,15 +1,16 @@
-import { useState } from "react";
 import { currencyCodes } from "../../constants";
 
-export default function ExchangeRateItem({ type, balance, state, setState, handleCode }) {
+export default function ExchangeRateItem({
+  type,
+  balance,
+  state,
+  handleCode,
+  handleInput,
+}) {
   const currentCode = type === "quote" ? state.fromCode : state.toCode; // set default code
+  const amount = type === 'quote' ? state.fromAmount : state.toAmount;
 
-  // const [currentCode, setCurrentCode] = useState(defaultCode);
-
-  const codes =
-    type === "quote"
-      ? currencyCodes
-      : currencyCodes.filter((code) => code !== state.fromCode);
+  console.log("amount", amount)
 
   return (
     <div className={`exchange-rate__${type}`}>
@@ -17,10 +18,10 @@ export default function ExchangeRateItem({ type, balance, state, setState, handl
         <select
           name=""
           className="currency-select"
-          onChange={e => handleCode(type, e.target.value)}
+          onChange={(e) => handleCode(type, e.target.value)}
           defaultValue={currentCode}
         >
-          {codes.map((code, index) => (
+          {currencyCodes.map((code) => (
             <option key={code}>{code}</option>
           ))}
         </select>
@@ -29,7 +30,7 @@ export default function ExchangeRateItem({ type, balance, state, setState, handl
         </div>
       </div>
       <div className="quantity">
-        <input type="text" placeholder="-" />
+        <input type="text" placeholder={type === 'quote' ? "-" : "+"} value={amount ? amount : ''} onChange={e => handleInput(type, e.target.value)}/>
       </div>
     </div>
   );
