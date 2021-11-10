@@ -1,4 +1,5 @@
 import { currencyCodes } from "../../constants";
+import {currencyFormat} from '../../utils';
 
 export default function ExchangeRateItem({
   type,
@@ -9,8 +10,6 @@ export default function ExchangeRateItem({
 }) {
   const currentCode = type === "quote" ? state.fromCode : state.toCode; // set default code
   const amount = type === 'quote' ? state.fromAmount : state.toAmount;
-
-  console.log("amount", amount)
 
   return (
     <div className={`exchange-rate__${type}`}>
@@ -26,7 +25,7 @@ export default function ExchangeRateItem({
           ))}
         </select>
         <div className="balance__amount">
-          Balance: <span>{balance[currentCode]}</span>
+          Balance: <span>{currencyFormat(balance[currentCode], currentCode, 2)}</span>
         </div>
       </div>
       <div className="quantity">

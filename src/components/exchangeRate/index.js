@@ -29,17 +29,17 @@ export default function ExchangeRate() {
   // Get the exchange rate on first load. Because API data is updated daily,
   // there is no need to fetch exchange rates in real time (Also free plan does not support it).
   useEffect(() => {
-    getRates().then((rates) => {
-      // calculate rates and store
-      setRates({
-        USDEUR: round(rates.EUR / rates.USD, 4),
-        USDGBP: round(rates.GBP / rates.USD, 4),
-        EURUSD: round(rates.USD, 4),
-        EURGBP: round(rates.GBP, 4),
-        GBPUSD: round(rates.USD / rates.GBP, 4),
-        GBPEUR: round(rates.EUR / rates.GBP, 4),
-      });
-    });
+    // getRates().then((rates) => {
+    //   // calculate rates and store
+    //   setRates({
+    //     USDEUR: round(rates.EUR / rates.USD, 4),
+    //     USDGBP: round(rates.GBP / rates.USD, 4),
+    //     EURUSD: round(rates.USD, 4),
+    //     EURGBP: round(rates.GBP, 4),
+    //     GBPUSD: round(rates.USD / rates.GBP, 4),
+    //     GBPEUR: round(rates.EUR / rates.GBP, 4),
+    //   });
+    // });
   }, []);
 
   // warn if fromAmount is grater than fromBalance
@@ -49,18 +49,28 @@ export default function ExchangeRate() {
     }
   }, [state, balance]);
 
+  useEffect(() => {
+    const { fromAmount, fromCode, toCode } = state;
+    if (fromAmount > 0) {
+      setState({
+        ...state,
+        toAmount: round(fromAmount * rates[fromCode + toCode]),
+      });
+    }
+  }, [state.fromCode, state.toCode]);
+
   const exchangeCurrency = () => {
     const { fromCode, toCode, fromAmount, toAmount } = state;
 
     // Warn if currency is not selected
     if (fromCode === toCode) {
-      toast.info('Select a currency to exchange');
+      toast.info("Select a currency to exchange");
       return;
     }
 
     // Warn if amount to exchange is 0
     if (!fromAmount) {
-      toast.info('Input amount to exchange');
+      toast.info("Input amount to exchange");
       return;
     }
 
@@ -78,7 +88,7 @@ export default function ExchangeRate() {
 
     clearExchangeAmount();
 
-    toast.success('Successfully exchanged!')
+    toast.success("Successfully exchanged!");
   };
 
   const clearExchangeAmount = () => {
@@ -117,10 +127,6 @@ export default function ExchangeRate() {
     state.fromCode === state.toCode
       ? currencyFormat(1, state.fromCode, 0)
       : currencyFormat(rates[state.fromCode + state.toCode], state.toCode, 4);
-
-  console.log("convertStr", convertStr);
-
-  console.log("state", state);
 
   return (
     <>
